@@ -8,7 +8,7 @@
     body {
       margin: 0;
       font-family: 'Segoe UI', sans-serif;
-      background-color: #eef4fa;
+      background-color: #f9f9f9;
       color: #0b3d91;
     }
     header {
@@ -76,31 +76,32 @@
       border-radius: 10px;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
-    
     .boton-regreso button {
-    background-color: #0b3d91;
-    color: white;
-    border: none;
-    padding: 0.8em 1.5em;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 1em;
-    font-weight: bold;
-}
-
+      background-color: #0b3d91;
+      color: white;
+      border: none;
+      padding: 0.8em 1.5em;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 1em;
+      font-weight: bold;
+    }
     footer {
       text-align: center;
       padding: 1em;
       background-color: #0b3d91;
       color: white;
     }
+    .estado-sequia { border: 4px solid #4b2e17; border-radius: 10px; }
+    .estado-deficit { border: 4px solid #5c4422; border-radius: 10px; }
+    .estado-optimo { border: 4px solid #6ccf5e; border-radius: 10px; }
+    .estado-exceso { border: 4px solid #b1903d; border-radius: 10px; }
   </style>
 </head>
 <body>
   <header>
     <h1>Sistema de Monitoreo Ambiental - Proyecto Arduino</h1>
   </header>
-
   <main class="contenedor">
     <div class="panel-filtro">
       <label>Desde: <input type="datetime-local" /></label>
@@ -108,57 +109,61 @@
       <button id="actualizarBtn">Actualizar</button>
     </div>
     <p style="text-align:center;">Actualiza todos los datos ingresados y lo que pasa en tiempo real</p>
-
     <section>
       <h2>Histórico de Humedad</h2>
       <div class="imagenes-humedad">
-        <!-- Reemplaza con tus imágenes -->
-        <img src="img/sequia.png" alt="Sequía prolongada" />
-        <img src="img/deficit.png" alt="Déficit de humedad" />
-        <img src="img/optimo.png" alt="Óptimo de humedad" />
-        <img src="img/exceso.png" alt="Exceso de humedad" />
+        <img id="sequiaImg" src="Imagenes/sequia.png" alt="Sequía prolongada" />
+        <img id="deficitImg" src="Imagenes/deficit.png" alt="Déficit de humedad" />
+        <img id="optimoImg" src="Imagenes/optimo.png" alt="Óptimo de humedad" />
+        <img id="excesoImg" src="Imagenes/exceso.png" alt="Exceso de humedad" />
       </div>
     </section>
-
     <section class="grafica-contenedor">
-      <div>
+      <div id="graficaPromedio" class="estado-optimo">
         <h4>Promedio de Humedad - Parcela A</h4>
         <canvas id="barChart"></canvas>
       </div>
-      <div>
+      <div id="graficaHistorico" class="estado-optimo">
         <h4>Histórico de Humedad del Suelo - Parcela A</h4>
         <canvas id="lineChart"></canvas>
       </div>
     </section>
-
     <div class="boton-regreso">
       <button onclick="location.href='dashboard.html'">⬅️ Regresar</button>
     </div>
   </main>
-
   <footer>
     <p>© 2025 Proyecto Arduino UNO - Todos los derechos reservados</p>
   </footer>
-
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script>
-    // 🌡️ Datos de ejemplo para barChart
-    const barCtx = document.getElementById('barChart').getContext('2d');
-    const barChart = new Chart(barCtx, {
+    const barChart = new Chart(document.getElementById('barChart').getContext('2d'), {
       type: 'bar',
       data: {
         labels: ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes'],
         datasets: [{
           label: '% Humedad',
-          data: [42, 55, 36, 48, 60],
+          data: [0, 0, 0, 0, 0],
           backgroundColor: '#0b3d91'
         }]
       },
       options: {
+        responsive: true,
         scales: {
-          y: { beginAtZero: true, min: 0, max: 100 }
+          y: {
+            beginAtZero: true,
+            min: 0,
+            max: 100,
+            ticks: { color: '#0b3d91' }
+          },
+          x: {
+            ticks: { color: '#0b3d91' }
+          }
         },
         plugins: {
+          legend: {
+         display: false},
+          tooltip: { enabled: true },
           annotation: {
             annotations: {
               line1: {
@@ -169,7 +174,10 @@
                 borderWidth: 2,
                 label: {
                   content: 'Umbral crítico',
-                  enabled: true
+                  enabled: true,
+                  backgroundColor: 'red',
+                  color: 'white',
+                  position: 'start'
                 }
               }
             }
@@ -178,26 +186,65 @@
       }
     });
 
-    // 📈 Datos de ejemplo para lineChart
-    const lineCtx = document.getElementById('lineChart').getContext('2d');
-    const lineChart = new Chart(lineCtx, {
+    const lineChart = new Chart(document.getElementById('lineChart').getContext('2d'), {
       type: 'line',
       data: {
         labels: ['01 Jul', '02 Jul', '03 Jul', '04 Jul', '05 Jul'],
         datasets: [{
           label: '% Humedad',
-          data: [50, 52, 47, 60, 45],
+          data: [0, 0, 0, 0, 0],
           borderColor: '#0b3d91',
           fill: false,
           tension: 0.3
         }]
       },
       options: {
+        responsive: true,
         scales: {
-          y: { beginAtZero: true, min: 0, max: 100 }
+          y: {
+            beginAtZero: true,
+            min: 0,
+            max: 100,
+            ticks: { color: '#0b3d91' }
+          },
+          x: {
+            ticks: { color: '#0b3d91' }
+          }
+        },
+        plugins: {
+          legend: {
+        display: false},
         }
       }
     });
+
+    function limpiarBordes() {
+      document.getElementById("sequiaImg").className = "";
+      document.getElementById("deficitImg").className = "";
+      document.getElementById("optimoImg").className = "";
+      document.getElementById("excesoImg").className = "";
+    }
+
+    function aplicarEstadoHumedad(humedad) {
+      limpiarBordes();
+      const leyenda = document.getElementById("leyendaHumedad");
+      if (humedad < 20) {
+        document.getElementById("sequiaImg").classList.add("estado-sequia");
+        leyenda.textContent = `Humedad baja 🌵 - ${humedad}%`;
+      } else if (humedad < 35) {
+        document.getElementById("deficitImg").classList.add("estado-deficit");
+        leyenda.textContent = `Humedad baja 🌵 - ${humedad}%`;
+      } else if (humedad <= 70) {
+        document.getElementById("optimoImg").classList.add("estado-optimo");
+        leyenda.textContent = `Humedad media ⚠️ - ${humedad}%`;
+      } else {
+        document.getElementById("excesoImg").classList.add("estado-exceso");
+        leyenda.textContent = `Humedad alta 🌱 - ${humedad}%`;
+      }
+    }
+
+    const humedadActual = 15;
+    aplicarEstadoHumedad(humedadActual);
   </script>
 </body>
 </html>
