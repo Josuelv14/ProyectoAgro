@@ -21,7 +21,7 @@
       padding: 40px;
       border-radius: 10px;
       width: 350px;
-      height: calc(80vh - 70px); /* Más alto sin pegar a bordes */
+      height: calc(85vh - 50px); /* Más alto */
       box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
       display: flex;
       flex-direction: column;
@@ -62,11 +62,12 @@
       border: none;
       border-radius: 6px;
       box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+      cursor: pointer;
       transition: background-color 0.3s;
     }
 
     .btn:hover {
-      background-color: #e0e0e0;
+      background-color: #d5d5d5;
     }
   </style>
 </head>
@@ -79,7 +80,7 @@
     <div class="names">Josue Valdez</div>
     <div class="names">Viviana Carchi</div>
     <div class="institution">UNIVERSIDAD POLITÉCNICA SALESIANA</div>
-    <button class="btn" onclick="window.location.href='dashboard.html'">INGRESAR</button>
+    <button class="btn" onclick="location.href='dashboard.html'">INGRESAR</button>
   </div>
 
 </body>
