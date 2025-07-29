@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Agricultura Inteligente - Login</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #e0e0e0;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      text-align: center;
+    }
+
+    .contenedor {
+      background-color: #4CAF50;
+      padding: 40px;
+      border-radius: 10px;
+      width: 350px;
+      height: calc(80vh - 70px); /* Más alto sin pegar a bordes */
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .logo {
+      width: 80px;
+      margin-bottom: 15px;
+      align-self: center;
+    }
+
+    .title {
+      font-size: 32px;
+      font-weight: 600;
+      color: black;
+      margin-bottom: 10px;
+    }
+
+    .names {
+      margin: 3px 0;
+      font-size: 18px;
+    }
+
+    .institution {
+      font-size: 19px;
+      font-weight: bold;
+      color: black;
+      margin-top: 10px;
+    }
+
+    .btn {
+      margin-top: 20px;
+      padding: 8px 18px;
+      font-size: 15px;
+      background-color: white;
+      color: #4CAF50;
+      border: none;
+      border-radius: 6px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+      transition: background-color 0.3s;
+    }
+
+    .btn:hover {
+      background-color: #e0e0e0;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="contenedor">
+    <img src="Imagenes/hoja.png" alt="Logo Hojita" class="logo"> 
+    <div class="title">Agricultura Inteligente</div>
+    <div class="names">Claudia Quevedo</div>
+    <div class="names">Josue Valdez</div>
+    <div class="names">Viviana Carchi</div>
+    <div class="institution">UNIVERSIDAD POLITÉCNICA SALESIANA</div>
+    <button class="btn" onclick="window.location.href='dashboard.html'">INGRESAR</button>
+  </div>
+
+</body>
+</html>
