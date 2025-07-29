@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Monitoreo Ambiental - Proyecto Arduino</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f0f0f0;
+      margin: 0;
+      padding: 30px;
+    }
+
+    .titulo {
+      background-color: #003366;
+      color: white;
+      text-align: center;
+      padding: 20px;
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    .contenedor {
+      margin-top: 30px;
+      background-color: #ffffff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    .subtitulo {
+      font-size: 20px;
+      margin-bottom: 20px;
+      color: #333;
+      text-align: center;
+    }
+
+    .velocimetro {
+      position: relative;
+      width: 300px;
+      height: 150px;
+      margin: 0 auto 40px auto;
+    }
+
+    .base {
+      width: 100%;
+      height: 100%;
+      border-top-left-radius: 150px;
+      border-top-right-radius: 150px;
+      background: linear-gradient(to right, green, yellow, red);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .aguja {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      width: 6px;
+      height: 130px;
+      background: black;
+      transform-origin: bottom center;
+      transform: rotate(-90deg);
+    }
+
+    .inferior {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 10px;
+    }
+
+    .leyenda {
+      font-size: 18px;
+      font-weight: bold;
+      color: #333;
+    }
+
+    .boton {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 10px 25px;
+      font-size: 16px;
+      border-radius: 5px;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .boton:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="titulo">Sistema de Monitoreo Ambiental - Proyecto Arduino</div>
+
+  <div class="contenedor">
+
+    <div class="subtitulo">Velocímetro de Humedad</div>
+
+    <div class="velocimetro">
+      <div class="base"></div>
+      <div class="aguja" id="aguja"></div>
+    </div>
+
+    <div class="inferior">
+      <div class="leyenda" id="leyenda">Humedad baja 🌵 — 0%</div>
+      <a href="dashboard.html" class="boton">Regresar</a>
+    </div>
+
+  </div>
+
+  <script>
+    let humedad = 0;
+
+    const aguja = document.getElementById('aguja');
+    const leyenda = document.getElementById('leyenda');
+
+    function actualizarVelocimetro(humedad) {
+      const angulo = (humedad / 100) * 180 - 90;
+      aguja.style.transform = `rotate(${angulo}deg)`;
+
+      if (humedad <= 35) {
+        leyenda.textContent = `Humedad baja 🌵 — ${humedad}%`;
+      } else if (humedad <= 70) {
+        leyenda.textContent = `Humedad media ⚠️ — ${humedad}%`;
+      } else {
+        leyenda.textContent = `Humedad alta 🌱 — ${humedad}%`;
+      }
+    }
+
+    actualizarVelocimetro(humedad);
+  </script>
+
+</body>
+</html>

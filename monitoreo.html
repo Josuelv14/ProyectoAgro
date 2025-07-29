@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Monitoreo Ambiental - Proyecto Arduino</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f0f0f0;
+      margin: 0;
+      padding: 30px;
+    }
+
+    .titulo {
+      background-color: #003366;
+      color: white;
+      text-align: center;
+      padding: 20px;
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    .contenedor {
+      margin-top: 30px;
+      background-color: #ffffff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    .subtitulo {
+      font-size: 20px;
+      margin-bottom: 20px;
+      color: #333;
+      text-align: center;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 30px;
+    }
+
+    th, td {
+      border: 1px solid #ccc;
+      padding: 10px;
+      text-align: center;
+    }
+
+    th {
+      background-color: #003366;
+      color: white;
+    }
+
+    .botones {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+
+    .boton {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 10px 25px;
+      font-size: 16px;
+      border-radius: 5px;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .boton:hover {
+      background-color: #0056b3;
+    }
+
+    .filtro-fechas {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #555;
+      font-size: 16px;
+    }
+
+    .input-grupo {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    .input-grupo input {
+      padding: 8px;
+      font-size: 15px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="titulo">Sistema de Monitoreo Ambiental - Proyecto Arduino</div>
+
+  <div class="contenedor">
+
+    <div class="subtitulo">Tabla de métricas de humedad por parcela</div>
+
+    <div class="filtro-fechas">Ingrese la fecha y hora de la lectura manual</div>
+
+    <div class="input-grupo">
+      <input type="date" id="fecha" />
+      <input type="time" id="hora" />
+    </div>
+
+    <table id="tabla-datos">
+      <thead>
+        <tr>
+          <th>Fecha</th>
+          <th>Hora</th>
+          <th>Humedad (%)</th>
+          <th>Estado</th>
+        </tr>
+      </thead>
+      <tbody id="cuerpo-tabla">
+        <!-- Datos dinámicos aquí -->
+      </tbody>
+    </table>
+
+    <div class="botones">
+      <a href="dashboard.html" class="boton">Regresar</a>
+      <button class="boton" onclick="agregarFila()">Actualizar</button>
+    </div>
+
+  </div>
+
+  <script>
+    function agregarFila() {
+      const fecha = document.getElementById('fecha').value;
+      const hora = document.getElementById('hora').value;
+
+      if (!fecha || !hora) {
+        alert('Por favor ingresa una fecha y una hora válidas.');
+        return;
+      }
+
+      // Por ahora humedad y estado están fijos, luego puedes conectarlo al Arduino.
+      const humedad = 0;
+      const estado = "Seco";
+
+      const nuevaFila = `
+        <tr>
+          <td>${fecha}</td>
+          <td>${hora}</td>
+          <td>${humedad}</td>
+          <td>${estado}</td>
+        </tr>
+      `;
+
+      const cuerpoTabla = document.getElementById('cuerpo-tabla');
+      cuerpoTabla.insertAdjacentHTML('beforeend', nuevaFila);
+
+      // Limpiar inputs
+      document.getElementById('fecha').value = '';
+      document.getElementById('hora').value = '';
+    }
+  </script>
+
+</body>
+</html>
