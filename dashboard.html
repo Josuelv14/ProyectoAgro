@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Sistema de Monitoreo Ambiental - Proyecto Arduino</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+    }
+
+    .titulo-principal {
+      background-color: #003366; 
+      color: white;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .contenedor-botones {
+      display: flex;
+      justify-content: space-around;
+      background-color: #e6e6e6; 
+      padding: 60px 20px; 
+      min-height: calc(100vh - 140px); 
+      box-sizing: border-box;
+    }
+
+    .boton-dashboard {
+      text-align: center;
+      width: 25%;
+      background-color: white;
+      padding: 20px;
+      height: 320px;
+      border-radius: 10px;
+      transition: transform 0.2s ease-in-out;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .boton-dashboard:hover {
+      transform: scale(1.05);
+    }
+
+    .boton-dashboard h2 {
+      color: #003366;
+      font-size: 1.1rem;
+      margin: 0;
+      margin-bottom: 10px;
+    }
+
+    .boton-dashboard img {
+      flex-grow: 1;
+      width: 100%;
+      object-fit: contain;
+      max-height: 220px;
+    }
+  </style>
+</head>
+<body>
+
+  <header class="titulo-principal">
+    <h1>Sistema de Monitoreo Ambiental - Proyecto Arduino</h1>
+  </header>
+
+  <main class="contenedor-botones">
+    <div class="boton-dashboard" onclick="window.location.href='velocimetro.html'">
+      <h2>Velocímetro - Estado actual</h2>
+      <img src="Imagenes/velocimetro.png" alt="Velocímetro">
+    </div>
+    <div class="boton-dashboard" onclick="window.location.href='monitoreo.html'">
+      <h2>Monitoreo</h2>
+      <img src="Imagenes/monitoreo.png" alt="Monitoreo">
+    </div>
+    <div class="boton-dashboard" onclick="window.location.href='grafica.html'">
+      <h2>Gráfica</h2>
+      <img src="Imagenes/grafica.png" alt="Gráfica">
+    </div>
+  </main>
+
+</body>
+</html>
